@@ -1,0 +1,1000 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>Organisation douce — V4</title>
+  <style>
+    :root {
+      --bg: #f5f7fb;
+      --surface: rgba(255,255,255,0.92);
+      --surface-strong: #ffffff;
+      --text: #1f2937;
+      --muted: #667085;
+      --border: #e6eaf2;
+      --accent: #5b5bd6;
+      --accent-soft: #eef0ff;
+      --success: #0f9d6a;
+      --success-soft: #ddf8ed;
+      --warning: #b7791f;
+      --warning-soft: #fff2d8;
+      --danger: #c24141;
+      --danger-soft: #ffe5e5;
+      --info: #2b6cb0;
+      --info-soft: #e3f0ff;
+      --neutral: #667085;
+      --neutral-soft: #f3f4f6;
+      --purple: #7c3aed;
+      --purple-soft: #efe7ff;
+      --shadow: 0 10px 30px rgba(31, 41, 55, 0.08);
+      --radius-xl: 24px;
+      --radius-lg: 18px;
+      --radius-md: 14px;
+    }
+
+    * { box-sizing: border-box; }
+
+    html, body {
+      margin: 0;
+      min-height: 100%;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      background:
+        radial-gradient(circle at top right, #edf2ff 0%, transparent 30%),
+        radial-gradient(circle at top left, #f9edff 0%, transparent 25%),
+        var(--bg);
+      color: var(--text);
+    }
+
+    body { padding: 16px; }
+
+    .app {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      gap: 16px;
+    }
+
+    .glass {
+      background: var(--surface);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255,255,255,0.8);
+      box-shadow: var(--shadow);
+      border-radius: var(--radius-xl);
+      padding: 18px;
+    }
+
+    .hero {
+      display: grid;
+      gap: 12px;
+    }
+
+    .hero-top {
+      display: flex;
+      justify-content: space-between;
+      gap: 14px;
+      align-items: start;
+      flex-wrap: wrap;
+    }
+
+    h1, h2, h3, p { margin: 0; }
+    h1 { font-size: 1.8rem; line-height: 1.15; margin-bottom: 6px; }
+    h2 { font-size: 1.15rem; margin-bottom: 10px; }
+    h3 { font-size: 1rem; margin-bottom: 6px; }
+
+    .subtitle, .small, .footer-note {
+      color: var(--muted);
+      line-height: 1.45;
+      font-size: 0.95rem;
+    }
+
+    .pill-row, .tabs, .actions-row, .meta-row, .status-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 8px 12px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.9);
+      border: 1px solid var(--border);
+      color: var(--muted);
+      font-size: 0.88rem;
+      font-weight: 600;
+    }
+
+    .stats, .helper-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      gap: 10px;
+    }
+
+    .stat, .helper-card {
+      background: rgba(255,255,255,0.88);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 14px;
+      display: grid;
+      gap: 4px;
+    }
+
+    .stat strong, .helper-card strong { font-size: 1.25rem; line-height: 1; }
+
+    .section { display: grid; gap: 12px; }
+
+    .section-title {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .tab {
+      border: 1px solid var(--border);
+      background: white;
+      color: var(--muted);
+      border-radius: 999px;
+      padding: 10px 14px;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    .tab.active {
+      background: var(--accent-soft);
+      color: var(--accent);
+      border-color: #d8ddff;
+    }
+
+    .panel { display: none; }
+    .panel.active { display: block; }
+
+    .form-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1fr 1fr auto;
+      gap: 10px;
+    }
+
+    input[type="text"], input[type="date"], input[type="time"], select {
+      width: 100%;
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 13px 14px;
+      background: white;
+      color: var(--text);
+      font-size: 0.98rem;
+      outline: none;
+    }
+
+    input:focus, select:focus {
+      border-color: #c7d2fe;
+      box-shadow: 0 0 0 4px rgba(91, 91, 214, 0.12);
+    }
+
+    button {
+      border: none;
+      border-radius: 14px;
+      padding: 11px 13px;
+      font-size: 0.94rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: transform 0.12s ease, box-shadow 0.12s ease;
+    }
+
+    button:hover { transform: translateY(-1px); }
+
+    .btn-primary { background: var(--accent); color: white; box-shadow: 0 10px 20px rgba(91, 91, 214, 0.18); }
+    .btn-secondary { background: var(--accent-soft); color: var(--accent); }
+    .btn-ghost { background: white; color: var(--text); border: 1px solid var(--border); }
+    .btn-soft-success { background: var(--success-soft); color: var(--success); }
+    .btn-soft-warning { background: var(--warning-soft); color: var(--warning); }
+
+    .layout { display: grid; grid-template-columns: 1.2fr 0.8fr; gap: 16px; }
+    .stack { display: grid; gap: 16px; }
+
+    .week-grid {
+      display: grid;
+      grid-template-columns: repeat(7, minmax(150px, 1fr));
+      gap: 10px;
+      overflow-x: auto;
+      padding-bottom: 6px;
+    }
+
+    .day-column {
+      min-height: 250px;
+      background: rgba(255,255,255,0.88);
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      padding: 12px;
+      display: grid;
+      align-content: start;
+      gap: 10px;
+    }
+
+    .day-column.today {
+      border: 2px solid rgba(91, 91, 214, 0.55);
+      background: linear-gradient(180deg, #f6f7ff 0%, white 100%);
+    }
+
+    .day-header {
+      display: grid;
+      gap: 4px;
+      padding-bottom: 10px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .day-name { font-size: 0.94rem; font-weight: 800; }
+    .day-date { font-size: 0.84rem; color: var(--muted); }
+    .mini-items { display: grid; gap: 8px; }
+
+    .mini-item {
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 10px;
+      display: grid;
+      gap: 6px;
+    }
+
+    .mini-time { font-size: 0.78rem; color: var(--muted); font-weight: 800; }
+    .mini-title { font-size: 0.9rem; line-height: 1.35; font-weight: 700; }
+
+    .empty {
+      border: 1px dashed var(--border);
+      border-radius: 16px;
+      padding: 14px;
+      color: var(--muted);
+      background: rgba(255,255,255,0.65);
+      line-height: 1.45;
+    }
+
+    .card-list { display: grid; gap: 10px; }
+
+    .item-card {
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      padding: 13px;
+      background: white;
+      display: grid;
+      gap: 10px;
+    }
+
+    .item-top {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      align-items: start;
+      flex-wrap: wrap;
+    }
+
+    .item-title { font-size: 1rem; font-weight: 800; line-height: 1.4; }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 7px 10px;
+      border-radius: 999px;
+      font-size: 0.82rem;
+      font-weight: 800;
+    }
+
+    .urgent { background: var(--danger-soft); color: var(--danger); }
+    .important { background: var(--warning-soft); color: var(--warning); }
+    .quick { background: var(--success-soft); color: var(--success); }
+    .focus { background: var(--info-soft); color: var(--info); }
+    .later { background: var(--neutral-soft); color: var(--neutral); }
+    .meeting { background: var(--purple-soft); color: var(--purple); }
+
+    .status-chip {
+      border: 1px solid var(--border);
+      background: white;
+      color: var(--muted);
+      border-radius: 999px;
+      padding: 8px 11px;
+      font-size: 0.82rem;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    .status-chip.active { background: var(--accent-soft); color: var(--accent); border-color: #d6dcff; }
+
+    .soft-box {
+      background: linear-gradient(180deg, #f0f3ff 0%, #ffffff 100%);
+      border: 1px solid #e1e6ff;
+      border-radius: 20px;
+      padding: 14px;
+      display: grid;
+      gap: 10px;
+    }
+
+    .today-note { color: var(--muted); font-size: 0.92rem; line-height: 1.45; }
+
+    .mini-toolbar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      align-items: center;
+    }
+
+    .small-select {
+      max-width: 180px;
+      padding: 10px 12px;
+      font-size: 0.9rem;
+      border-radius: 12px;
+    }
+
+    @media (max-width: 980px) {
+      .layout { grid-template-columns: 1fr; }
+      .form-grid { grid-template-columns: 1fr 1fr; }
+    }
+
+    @media (max-width: 680px) {
+      body { padding: 12px; }
+      .glass { padding: 14px; }
+      .form-grid { grid-template-columns: 1fr; }
+      .week-grid { grid-template-columns: repeat(7, minmax(220px, 1fr)); }
+      .hero-top, .section-title { align-items: stretch; }
+      .tabs { width: 100%; }
+      .tab, button { width: 100%; }
+      .small-select { max-width: none; width: 100%; }
+    }
+  </style>
+</head>
+<body>
+  <div class="app">
+    <section class="glass hero">
+      <div class="hero-top">
+        <div>
+          <h1>Organisation douce</h1>
+          <p class="subtitle">Une version plus proche d’un vrai usage quotidien : semaine visible, priorités du jour, report simple et fin de journée nuancée.</p>
+        </div>
+        <div class="pill-row">
+          <span class="pill">🧠 pensée TDAH</span>
+          <span class="pill">📅 agenda + tâches</span>
+          <span class="pill">🌿 moins de pression</span>
+        </div>
+      </div>
+      <div class="stats" id="topStats"></div>
+    </section>
+
+    <section class="glass section">
+      <div class="section-title">
+        <h2>Ajouter rapidement</h2>
+      </div>
+      <div class="form-grid">
+        <input id="itemText" type="text" placeholder="Ex. envoyer un CV, visio avec coach, lessive..." />
+        <select id="itemType">
+          <option value="inbox">Boîte de dépôt</option>
+          <option value="task">Tâche planifiée</option>
+          <option value="event">Rendez-vous</option>
+        </select>
+        <select id="tagSelect">
+          <option value="urgent">🔴 Urgent</option>
+          <option value="important">🟡 Important</option>
+          <option value="quick">🟢 Rapide</option>
+          <option value="focus">🔵 Concentration</option>
+          <option value="later">⚪ Plus tard</option>
+        </select>
+        <input id="itemDate" type="date" />
+        <input id="itemTime" type="time" />
+        <button id="addBtn" class="btn-primary">Ajouter</button>
+      </div>
+      <p class="small">Boîte de dépôt = je note sans décider. Tâche planifiée = un jour. Rendez-vous = un jour + une heure.</p>
+    </section>
+
+    <section class="layout">
+      <div class="stack">
+        <section class="glass section">
+          <div class="section-title">
+            <h2>Agenda semaine</h2>
+            <div class="pill-row">
+              <button class="btn-secondary" id="prevWeekBtn">← Semaine précédente</button>
+              <button class="btn-secondary" id="currentWeekBtn">Cette semaine</button>
+              <button class="btn-secondary" id="nextWeekBtn">Semaine suivante →</button>
+            </div>
+          </div>
+          <div id="weekGrid" class="week-grid"></div>
+        </section>
+
+        <section class="glass section">
+          <div class="section-title">
+            <h2>Vue principale</h2>
+            <div class="tabs">
+              <button class="tab active" data-panel="todayPanel">Aujourd’hui</button>
+              <button class="tab" data-panel="inboxPanel">Boîte de dépôt</button>
+              <button class="tab" data-panel="allPanel">Tout</button>
+            </div>
+          </div>
+
+          <div id="todayPanel" class="panel active">
+            <div class="soft-box">
+              <div class="section-title">
+                <h3>Mode matin</h3>
+                <div class="mini-toolbar">
+                  <button id="autoPickBtn" class="btn-secondary">Choisir mes 3 priorités</button>
+                  <button id="resetTodayBtn" class="btn-ghost">Réinitialiser mes priorités</button>
+                </div>
+              </div>
+              <div class="helper-grid" id="todayHelpers"></div>
+              <p class="today-note">Rendez-vous du jour + jusqu’à 3 tâches prioritaires. L’idée est d’aider à commencer sans voir toute la charge.</p>
+            </div>
+
+            <div class="soft-box" style="margin-top: 12px;">
+              <div class="section-title">
+                <h3>Mode soir</h3>
+                <div class="mini-toolbar">
+                  <button id="carryOverBtn" class="btn-soft-warning">Reporter au lendemain</button>
+                  <button id="markVisibleDoneBtn" class="btn-soft-success">Marquer visibles comme faits</button>
+                </div>
+              </div>
+              <p class="today-note">Le soir, on peut boucler la journée rapidement : finir, reporter, ou reconnaître que ce n’était plus nécessaire.</p>
+            </div>
+
+            <div id="todayList" class="card-list" style="margin-top: 12px;"></div>
+          </div>
+
+          <div id="inboxPanel" class="panel">
+            <div class="soft-box">
+              <h3>Boîte de dépôt</h3>
+              <p class="today-note">Ici, on vide la tête sans obligation de trier tout de suite. Ensuite, on peut planifier plus tard.</p>
+            </div>
+            <div id="inboxList" class="card-list" style="margin-top: 12px;"></div>
+          </div>
+
+          <div id="allPanel" class="panel">
+            <div class="soft-box">
+              <div class="section-title">
+                <h3>Tous les éléments</h3>
+                <select id="bulkMoveSelect" class="small-select">
+                  <option value="">Déplacer tous les reportés vers…</option>
+                  <option value="tomorrow">Demain</option>
+                  <option value="nextweek">La semaine prochaine</option>
+                </select>
+              </div>
+              <p class="today-note">Vue complète si besoin d’une vérification globale. Pas forcément l’écran du quotidien.</p>
+            </div>
+            <div id="allList" class="card-list" style="margin-top: 12px;"></div>
+          </div>
+        </section>
+      </div>
+
+      <div class="stack">
+        <section class="glass section">
+          <div class="section-title">
+            <h2>Fin de journée</h2>
+          </div>
+          <div class="helper-grid" id="summaryGrid"></div>
+          <p id="encouragement" class="footer-note"></p>
+        </section>
+
+        <section class="glass section">
+          <div class="section-title">
+            <h2>Repères doux</h2>
+          </div>
+          <div class="helper-grid">
+            <div class="helper-card">
+              <div class="small">Matin</div>
+              <strong>3 tâches max</strong>
+              <div class="small">Pour démarrer sans panique.</div>
+            </div>
+            <div class="helper-card">
+              <div class="small">Semaine</div>
+              <strong>Vision globale</strong>
+              <div class="small">Pour voir les jours et les rendez-vous.</div>
+            </div>
+            <div class="helper-card">
+              <div class="small">Dépôt</div>
+              <strong>Capturer sans trier</strong>
+              <div class="small">Pour ne pas oublier.</div>
+            </div>
+            <div class="helper-card">
+              <div class="small">Soir</div>
+              <strong>Reporter facilement</strong>
+              <div class="small">Pour sortir du sentiment d’échec.</div>
+            </div>
+          </div>
+        </section>
+      </div>
+    </section>
+  </div>
+
+  <script>
+    const storageKey = 'organisation-douce-v4';
+    const dayNames = ['Dimanche', 'Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi'];
+    const shortMonths = ['janv.', 'févr.', 'mars', 'avr.', 'mai', 'juin', 'juil.', 'août', 'sept.', 'oct.', 'nov.', 'déc.'];
+
+    const tagConfig = {
+      urgent: { label: '🔴 Urgent', className: 'urgent', rank: 1 },
+      important: { label: '🟡 Important', className: 'important', rank: 2 },
+      quick: { label: '🟢 Rapide', className: 'quick', rank: 3 },
+      focus: { label: '🔵 Concentration', className: 'focus', rank: 4 },
+      later: { label: '⚪ Plus tard', className: 'later', rank: 5 }
+    };
+
+    const statuses = [
+      { key: 'todo', label: '⬜ À faire' },
+      { key: 'done', label: '✅ Fait' },
+      { key: 'started', label: '🟨 Commencé' },
+      { key: 'moved', label: '➡️ Reporté' },
+      { key: 'cancelled', label: '❌ Annulé' }
+    ];
+
+    function isoToday() {
+      const d = new Date();
+      d.setMinutes(d.getMinutes() - d.getTimezoneOffset());
+      return d.toISOString().split('T')[0];
+    }
+
+    function toIsoDate(date) {
+      const d = new Date(date);
+      d.setMinutes(d.getMinutes() - d.getTimezoneOffset());
+      return d.toISOString().split('T')[0];
+    }
+
+    function addDays(iso, days) {
+      const d = new Date(iso + 'T12:00:00');
+      d.setDate(d.getDate() + days);
+      return toIsoDate(d);
+    }
+
+    function startOfWeek(date) {
+      const d = new Date(date);
+      const day = d.getDay();
+      const diff = day === 0 ? -6 : 1 - day;
+      d.setDate(d.getDate() + diff);
+      d.setHours(0,0,0,0);
+      return d;
+    }
+
+    function formatDateLabel(iso) {
+      if (!iso) return 'Sans date';
+      const d = new Date(iso + 'T12:00:00');
+      return `${d.getDate()} ${shortMonths[d.getMonth()]}`;
+    }
+
+    const defaultItems = [
+      { id: crypto.randomUUID(), text: 'Penser à appeler la CAF', type: 'inbox', tag: 'later', date: '', time: '', inToday: false, status: 'todo' },
+      { id: crypto.randomUUID(), text: 'Envoyer un CV', type: 'task', tag: 'important', date: isoToday(), time: '', inToday: true, status: 'todo' },
+      { id: crypto.randomUUID(), text: 'Visio avec coach insertion', type: 'event', tag: 'important', date: isoToday(), time: '14:00', inToday: true, status: 'todo' },
+      { id: crypto.randomUUID(), text: 'Appeler le médecin', type: 'task', tag: 'urgent', date: isoToday(), time: '', inToday: true, status: 'started' },
+      { id: crypto.randomUUID(), text: 'Faire une lessive', type: 'task', tag: 'quick', date: addDays(isoToday(), 1), time: '', inToday: false, status: 'todo' },
+      { id: crypto.randomUUID(), text: 'Dentiste', type: 'event', tag: 'urgent', date: addDays(isoToday(), 2), time: '09:00', inToday: false, status: 'todo' },
+      { id: crypto.randomUUID(), text: 'Ranger papiers 15 min', type: 'task', tag: 'focus', date: addDays(isoToday(), 3), time: '', inToday: false, status: 'todo' }
+    ];
+
+    let items = JSON.parse(localStorage.getItem(storageKey)) || defaultItems;
+    let currentWeekStart = startOfWeek(new Date());
+
+    const itemText = document.getElementById('itemText');
+    const itemType = document.getElementById('itemType');
+    const tagSelect = document.getElementById('tagSelect');
+    const itemDate = document.getElementById('itemDate');
+    const itemTime = document.getElementById('itemTime');
+    const addBtn = document.getElementById('addBtn');
+    const weekGrid = document.getElementById('weekGrid');
+    const todayList = document.getElementById('todayList');
+    const inboxList = document.getElementById('inboxList');
+    const allList = document.getElementById('allList');
+    const topStats = document.getElementById('topStats');
+    const todayHelpers = document.getElementById('todayHelpers');
+    const summaryGrid = document.getElementById('summaryGrid');
+    const encouragement = document.getElementById('encouragement');
+    const autoPickBtn = document.getElementById('autoPickBtn');
+    const resetTodayBtn = document.getElementById('resetTodayBtn');
+    const carryOverBtn = document.getElementById('carryOverBtn');
+    const markVisibleDoneBtn = document.getElementById('markVisibleDoneBtn');
+    const prevWeekBtn = document.getElementById('prevWeekBtn');
+    const currentWeekBtn = document.getElementById('currentWeekBtn');
+    const nextWeekBtn = document.getElementById('nextWeekBtn');
+    const bulkMoveSelect = document.getElementById('bulkMoveSelect');
+
+    itemDate.value = isoToday();
+
+    function save() { localStorage.setItem(storageKey, JSON.stringify(items)); }
+
+    function normalizeByType(type, date, time) {
+      if (type === 'inbox') return { date: '', time: '' };
+      if (type === 'task') return { date: date || isoToday(), time: '' };
+      return { date: date || isoToday(), time: time || '' };
+    }
+
+    function addItem() {
+      const text = itemText.value.trim();
+      if (!text) return;
+      const normalized = normalizeByType(itemType.value, itemDate.value, itemTime.value);
+      items.unshift({
+        id: crypto.randomUUID(),
+        text,
+        type: itemType.value,
+        tag: tagSelect.value,
+        date: normalized.date,
+        time: normalized.time,
+        inToday: false,
+        status: 'todo'
+      });
+      itemText.value = '';
+      itemTime.value = '';
+      save();
+      render();
+    }
+
+    function removeItem(id) {
+      items = items.filter(item => item.id !== id);
+      save();
+      render();
+    }
+
+    function setStatus(id, status) {
+      items = items.map(item => item.id === id ? { ...item, status } : item);
+      save();
+      render();
+    }
+
+    function moveItemDate(id, target) {
+      items = items.map(item => {
+        if (item.id !== id || item.type === 'inbox') return item;
+        const newDate = target === 'today' ? isoToday() : addDays(isoToday(), 1);
+        return { ...item, date: newDate, inToday: target === 'today' && item.type === 'task' ? item.inToday : false };
+      });
+      save();
+      render();
+    }
+
+    function toggleToday(id) {
+      const today = isoToday();
+      const currentCount = items.filter(item => item.type === 'task' && item.date === today && item.inToday).length;
+      items = items.map(item => {
+        if (item.id !== id) return item;
+        if (item.type !== 'task' || item.date !== today) return item;
+        if (!item.inToday && currentCount >= 3) return item;
+        return { ...item, inToday: !item.inToday };
+      });
+      save();
+      render();
+    }
+
+    function promoteInboxToTask(id) {
+      items = items.map(item => item.id === id ? { ...item, type: 'task', date: isoToday(), time: '', tag: item.tag || 'later' } : item);
+      save();
+      render();
+    }
+
+    function promoteInboxToEvent(id) {
+      items = items.map(item => item.id === id ? { ...item, type: 'event', date: isoToday(), time: '09:00', tag: item.tag || 'important' } : item);
+      save();
+      render();
+    }
+
+    function autoPickToday() {
+      const today = isoToday();
+      items = items.map(item => item.type === 'task' && item.date === today ? { ...item, inToday: false } : item);
+      const picks = [...items]
+        .filter(item => item.type === 'task' && item.date === today && item.status !== 'done' && item.status !== 'cancelled')
+        .sort((a, b) => tagConfig[a.tag].rank - tagConfig[b.tag].rank)
+        .slice(0, 3)
+        .map(item => item.id);
+      items = items.map(item => picks.includes(item.id) ? { ...item, inToday: true } : item);
+      save();
+      render();
+    }
+
+    function resetTodayPriorities() {
+      const today = isoToday();
+      items = items.map(item => item.type === 'task' && item.date === today ? { ...item, inToday: false } : item);
+      save();
+      render();
+    }
+
+    function carryOverTodayTasks() {
+      const today = isoToday();
+      const tomorrow = addDays(today, 1);
+      items = items.map(item => {
+        if (item.type !== 'task' || item.date !== today) return item;
+        if (item.status === 'done' || item.status === 'cancelled') return item;
+        return { ...item, date: tomorrow, inToday: false, status: 'moved' };
+      });
+      save();
+      render();
+    }
+
+    function markVisibleTodayDone() {
+      const today = isoToday();
+      items = items.map(item => {
+        const visible = (item.type === 'event' && item.date === today) || (item.type === 'task' && item.date === today && item.inToday);
+        return visible ? { ...item, status: 'done' } : item;
+      });
+      save();
+      render();
+    }
+
+    function bulkMoveReported(target) {
+      if (!target) return;
+      const baseDate = target === 'tomorrow' ? addDays(isoToday(), 1) : addDays(isoToday(), 7);
+      items = items.map(item => item.status === 'moved' && item.type !== 'inbox' ? { ...item, date: baseDate, inToday: false } : item);
+      bulkMoveSelect.value = '';
+      save();
+      render();
+    }
+
+    function getTypeBadge(item) {
+      if (item.type === 'event') return { text: '📅 Rendez-vous', className: 'meeting' };
+      if (item.type === 'inbox') return { text: '📥 Boîte de dépôt', className: 'later' };
+      return { text: tagConfig[item.tag].label, className: tagConfig[item.tag].className };
+    }
+
+    function createStatusRow(item) {
+      const row = document.createElement('div');
+      row.className = 'status-row';
+      statuses.forEach(status => {
+        const chip = document.createElement('button');
+        chip.className = 'status-chip' + (item.status === status.key ? ' active' : '');
+        chip.textContent = status.label;
+        chip.addEventListener('click', () => setStatus(item.id, status.key));
+        row.appendChild(chip);
+      });
+      return row;
+    }
+
+    function createCard(item) {
+      const card = document.createElement('div');
+      card.className = 'item-card';
+
+      const top = document.createElement('div');
+      top.className = 'item-top';
+
+      const left = document.createElement('div');
+      const title = document.createElement('div');
+      title.className = 'item-title';
+      title.textContent = item.text;
+
+      const meta = document.createElement('div');
+      meta.className = 'meta-row';
+      const typeBadge = getTypeBadge(item);
+
+      const badge1 = document.createElement('span');
+      badge1.className = 'badge ' + typeBadge.className;
+      badge1.textContent = typeBadge.text;
+      meta.appendChild(badge1);
+
+      if (item.type !== 'inbox') {
+        const badge2 = document.createElement('span');
+        badge2.className = 'badge later';
+        badge2.textContent = `🗓️ ${formatDateLabel(item.date)}${item.time ? ' • ' + item.time : ''}`;
+        meta.appendChild(badge2);
+      }
+
+      left.appendChild(title);
+      left.appendChild(meta);
+
+      const actions = document.createElement('div');
+      actions.className = 'actions-row';
+
+      if (item.type === 'task' && item.date === isoToday()) {
+        const todayBtn = document.createElement('button');
+        todayBtn.className = 'btn-ghost';
+        todayBtn.textContent = item.inToday ? 'Retirer d’aujourd’hui' : 'Mettre aujourd’hui';
+        todayBtn.addEventListener('click', () => toggleToday(item.id));
+        actions.appendChild(todayBtn);
+      }
+
+      if (item.type === 'inbox') {
+        const toTask = document.createElement('button');
+        toTask.className = 'btn-secondary';
+        toTask.textContent = 'Planifier en tâche';
+        toTask.addEventListener('click', () => promoteInboxToTask(item.id));
+        actions.appendChild(toTask);
+
+        const toEvent = document.createElement('button');
+        toEvent.className = 'btn-ghost';
+        toEvent.textContent = 'Transformer en rendez-vous';
+        toEvent.addEventListener('click', () => promoteInboxToEvent(item.id));
+        actions.appendChild(toEvent);
+      } else {
+        const moveToday = document.createElement('button');
+        moveToday.className = 'btn-ghost';
+        moveToday.textContent = 'Mettre aujourd’hui';
+        moveToday.addEventListener('click', () => moveItemDate(item.id, 'today'));
+        actions.appendChild(moveToday);
+
+        const moveTomorrow = document.createElement('button');
+        moveTomorrow.className = 'btn-ghost';
+        moveTomorrow.textContent = 'Mettre demain';
+        moveTomorrow.addEventListener('click', () => moveItemDate(item.id, 'tomorrow'));
+        actions.appendChild(moveTomorrow);
+      }
+
+      const deleteBtn = document.createElement('button');
+      deleteBtn.className = 'btn-ghost';
+      deleteBtn.textContent = 'Supprimer';
+      deleteBtn.addEventListener('click', () => removeItem(item.id));
+      actions.appendChild(deleteBtn);
+
+      top.appendChild(left);
+      top.appendChild(actions);
+      card.appendChild(top);
+      card.appendChild(createStatusRow(item));
+      return card;
+    }
+
+    function renderTopStats() {
+      const today = isoToday();
+      const inboxCount = items.filter(item => item.type === 'inbox').length;
+      const todayEvents = items.filter(item => item.type === 'event' && item.date === today).length;
+      const todayTasks = items.filter(item => item.type === 'task' && item.date === today && item.inToday).length;
+      const movedCount = items.filter(item => item.status === 'moved').length;
+      topStats.innerHTML = `
+        <div class="stat"><div class="small">Aujourd’hui</div><strong>${todayTasks + todayEvents}</strong><div class="small">éléments visibles</div></div>
+        <div class="stat"><div class="small">Boîte de dépôt</div><strong>${inboxCount}</strong><div class="small">à trier plus tard</div></div>
+        <div class="stat"><div class="small">Rendez-vous du jour</div><strong>${todayEvents}</strong><div class="small">avec heure</div></div>
+        <div class="stat"><div class="small">Reportés</div><strong>${movedCount}</strong><div class="small">à replanifier</div></div>
+      `;
+    }
+
+    function renderWeek() {
+      weekGrid.innerHTML = '';
+      const today = isoToday();
+      for (let i = 0; i < 7; i++) {
+        const day = new Date(currentWeekStart);
+        day.setDate(currentWeekStart.getDate() + i);
+        const iso = toIsoDate(day);
+        const dayItems = items
+          .filter(item => item.type !== 'inbox' && item.date === iso)
+          .sort((a, b) => {
+            if (a.type !== b.type) return a.type === 'event' ? -1 : 1;
+            if (a.time && b.time) return a.time.localeCompare(b.time);
+            if (a.time) return -1;
+            if (b.time) return 1;
+            return tagConfig[a.tag].rank - tagConfig[b.tag].rank;
+          });
+
+        const col = document.createElement('div');
+        col.className = 'day-column' + (iso === today ? ' today' : '');
+        const header = document.createElement('div');
+        header.className = 'day-header';
+        header.innerHTML = `<div class="day-name">${dayNames[day.getDay()]}</div><div class="day-date">${formatDateLabel(iso)}</div>`;
+
+        const wrap = document.createElement('div');
+        wrap.className = 'mini-items';
+
+        if (!dayItems.length) {
+          const empty = document.createElement('div');
+          empty.className = 'empty';
+          empty.textContent = 'Rien de prévu.';
+          wrap.appendChild(empty);
+        } else {
+          dayItems.forEach(item => {
+            const mini = document.createElement('div');
+            mini.className = 'mini-item';
+            const type = getTypeBadge(item);
+            mini.innerHTML = `
+              ${item.time ? `<div class="mini-time">${item.time}</div>` : ''}
+              <div class="mini-title">${item.text}</div>
+              <div class="badge ${type.className}" style="width: fit-content;">${type.text}</div>
+            `;
+            wrap.appendChild(mini);
+          });
+        }
+
+        col.appendChild(header);
+        col.appendChild(wrap);
+        weekGrid.appendChild(col);
+      }
+    }
+
+    function renderTodayHelpers() {
+      const today = isoToday();
+      const events = items.filter(item => item.type === 'event' && item.date === today).length;
+      const priorities = items.filter(item => item.type === 'task' && item.date === today && item.inToday).length;
+      const remaining = items.filter(item => item.type === 'task' && item.date === today && item.status === 'todo').length;
+      todayHelpers.innerHTML = `
+        <div class="helper-card"><div class="small">Rendez-vous</div><strong>${events}</strong><div class="small">apparaissent automatiquement</div></div>
+        <div class="helper-card"><div class="small">Priorités</div><strong>${priorities}</strong><div class="small">tâches visibles aujourd’hui</div></div>
+        <div class="helper-card"><div class="small">Encore à faire</div><strong>${remaining}</strong><div class="small">éléments en attente aujourd’hui</div></div>
+      `;
+    }
+
+    function renderToday() {
+      todayList.innerHTML = '';
+      const today = isoToday();
+      const todayItems = items
+        .filter(item => (item.type === 'event' && item.date === today) || (item.type === 'task' && item.date === today && item.inToday))
+        .sort((a, b) => {
+          if (a.type !== b.type) return a.type === 'event' ? -1 : 1;
+          if (a.time && b.time) return a.time.localeCompare(b.time);
+          if (a.time) return -1;
+          if (b.time) return 1;
+          return tagConfig[a.tag].rank - tagConfig[b.tag].rank;
+        });
+      if (!todayItems.length) {
+        todayList.innerHTML = '<div class="empty">Aucun élément visible aujourd’hui. Choisissez jusqu’à 3 tâches, les rendez-vous du jour apparaissent automatiquement.</div>';
+        return;
+      }
+      todayItems.forEach(item => todayList.appendChild(createCard(item)));
+    }
+
+    function renderInbox() {
+      inboxList.innerHTML = '';
+      const inboxItems = items.filter(item => item.type === 'inbox');
+      if (!inboxItems.length) {
+        inboxList.innerHTML = '<div class="empty">La boîte de dépôt est vide.</div>';
+        return;
+      }
+      inboxItems.forEach(item => inboxList.appendChild(createCard(item)));
+    }
+
+    function renderAll() {
+      allList.innerHTML = '';
+      if (!items.length) {
+        allList.innerHTML = '<div class="empty">Aucun élément pour le moment.</div>';
+        return;
+      }
+      const sorted = [...items].sort((a, b) => {
+        if (a.type === 'inbox' && b.type !== 'inbox') return -1;
+        if (a.type !== 'inbox' && b.type === 'inbox') return 1;
+        if ((a.date || '') !== (b.date || '')) return (a.date || '').localeCompare(b.date || '');
+        if (a.type !== b.type) return a.type === 'event' ? -1 : 1;
+        if (a.time && b.time) return a.time.localeCompare(b.time);
+        if (a.time) return -1;
+        if (b.time) return 1;
+        return tagConfig[a.tag].rank - tagConfig[b.tag].rank;
+      });
+      sorted.forEach(item => allList.appendChild(createCard(item)));
+    }
+
+    function renderSummary() {
+      const counts = {
+        done: items.filter(i => i.status === 'done').length,
+        started: items.filter(i => i.status === 'started').length,
+        moved: items.filter(i => i.status === 'moved').length,
+        cancelled: items.filter(i => i.status === 'cancelled').length
+      };
+      summaryGrid.innerHTML = `
+        <div class="helper-card"><div class="small">✅ Faits</div><strong>${counts.done}</strong><div class="small">ce qui est terminé</div></div>
+        <div class="helper-card"><div class="small">🟨 Commencés</div><strong>${counts.started}</strong><div class="small">ce qui a avancé</div></div>
+        <div class="helper-card"><div class="small">➡️ Reportés</div><strong>${counts.moved}</strong><div class="small">ce qui attend un autre moment</div></div>
+        <div class="helper-card"><div class="small">❌ Annulés</div><strong>${counts.cancelled}</strong><div class="small">ce qui n’est plus nécessaire</div></div>
+      `;
+      if (counts.done > 0 || counts.started > 0) {
+        encouragement.textContent = 'Aujourd’hui n’a pas besoin d’être parfait. Le but est d’avancer sans s’écraser.';
+      } else if (counts.moved > 0) {
+        encouragement.textContent = 'Reporter peut être une vraie décision d’organisation, pas un échec.';
+      } else {
+        encouragement.textContent = 'Cet outil cherche à soulager, pas à mettre la pression.';
+      }
+    }
+
+    function activatePanel(panelId) {
+      document.querySelectorAll('.tab').forEach(tab => tab.classList.toggle('active', tab.dataset.panel === panelId));
+      document.querySelectorAll('.panel').forEach(panel => panel.classList.toggle('active', panel.id === panelId));
+    }
+
+    function render() {
+      renderTopStats();
+      renderWeek();
+      renderTodayHelpers();
+      renderToday();
+      renderInbox();
+      renderAll();
+      renderSummary();
+    }
+
+    addBtn.addEventListener('click', addItem);
+    itemText.addEventListener('keydown', (e) => { if (e.key === 'Enter') addItem(); });
+    autoPickBtn.addEventListener('click', autoPickToday);
+    resetTodayBtn.addEventListener('click', resetTodayPriorities);
+    carryOverBtn.addEventListener('click', carryOverTodayTasks);
+    markVisibleDoneBtn.addEventListener('click', markVisibleTodayDone);
+    prevWeekBtn.addEventListener('click', () => { currentWeekStart.setDate(currentWeekStart.getDate() - 7); currentWeekStart = new Date(currentWeekStart); render(); });
+    nextWeekBtn.addEventListener('click', () => { currentWeekStart.setDate(currentWeekStart.getDate() + 7); currentWeekStart = new Date(currentWeekStart); render(); });
+    currentWeekBtn.addEventListener('click', () => { currentWeekStart = startOfWeek(new Date()); render(); });
+    bulkMoveSelect.addEventListener('change', (e) => bulkMoveReported(e.target.value));
+    document.querySelectorAll('.tab').forEach(tab => tab.addEventListener('click', () => activatePanel(tab.dataset.panel)));
+
+    render();
+  </script>
+</body>
+</html>
